@@ -29,6 +29,12 @@ export class PromotionComponent implements OnInit {
     } else if (this.event.phone == "") {
       this.message = "Campo telefone Obrigatorio";
       return true;
+    } else if (this.event.phone.toString().length <= 10) {
+      this.message = "Telefone inválido, acrescente o DDD + o número";
+      return true;
+    } else if (!true) {
+      this.message = "Telefone inválido, acrescente o DDD + o número";
+      return true;
     } else {
         this.message = "";
         return false;
