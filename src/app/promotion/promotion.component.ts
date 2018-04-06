@@ -12,6 +12,7 @@ export class PromotionComponent implements OnInit {
 
   event: Event;
   message: string = "";
+  isLoading: boolean;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -20,6 +21,7 @@ export class PromotionComponent implements OnInit {
 
   ngOnInit() {
     this.event = new Event("", "", 0, "", new Date());
+    this.isLoading = false;
   }
 
   validadeEmail(email: string) : boolean {
@@ -29,7 +31,7 @@ export class PromotionComponent implements OnInit {
     return true;
   }
 
-  validate() : boolean {
+  validate() : boolean {    
     if (this.event.email == "") {
       this.message = "Campo email obrigatório";
       return false;
@@ -43,7 +45,8 @@ export class PromotionComponent implements OnInit {
       this.message = "Telefone inválido, acrescente o DDD + o número";
       return false;
     } else {
-        this.message = "";
+      this.isLoading = true;  
+      this.message = "";
         return true;
     }
 
