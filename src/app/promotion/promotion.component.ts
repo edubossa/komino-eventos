@@ -39,7 +39,7 @@ export class PromotionComponent implements OnInit {
     }else if (!this.validadeEmail(this.event.email)) {
         this.message = "Email inválido";
         return false;  
-    } else if (this.event.phone.toString().length <= 10) {
+    } else if (this.event.phone.toString().length < 10) {
       this.message = "Telefone inválido, acrescente o DDD + o número";
       return false;
     } else {
