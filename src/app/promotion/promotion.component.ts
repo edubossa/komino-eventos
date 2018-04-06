@@ -22,28 +22,35 @@ export class PromotionComponent implements OnInit {
     this.event = new Event("", "", 0, "", new Date());
   }
 
+  validadeEmail(email: string) : boolean {
+    if (email.search("@") == -1) return false;
+    if (email.indexOf(".") == -1) return false;
+    if (email.length <= 5) return false;
+    return true;
+  }
+
   validate() : boolean {
     if (this.event.email == "") {
-      this.message = "Campo email Obrigatorio";
-      return true;
+      this.message = "Campo email obrigatório";
+      return false;
     } else if (this.event.phone == "") {
-      this.message = "Campo telefone Obrigatorio";
-      return true;
+      this.message = "Campo telefone obrigatório";
+      return false;
+    }else if (!this.validadeEmail(this.event.email)) {
+        this.message = "Email inválido";
+        return false;  
     } else if (this.event.phone.toString().length <= 10) {
       this.message = "Telefone inválido, acrescente o DDD + o número";
-      return true;
-    } else if (!true) {
-      this.message = "Telefone inválido, acrescente o DDD + o número";
-      return true;
+      return false;
     } else {
         this.message = "";
-        return false;
+        return true;
     }
 
   }
 
   send() : void {
-    if (this.validate()) return;
+    if (!this.validate()) return;
 
     this.activatedRoute.queryParams.subscribe(params => {
       let url = params['url'];
